@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+    <title>Edit Data About Doctor</title>
+</h:head>
+<h:body>
+	<h2><h:outputText value="Редактировать данные о враче"/></h2>
+	<h:form>
+		<h:panelGrid columns="2" border="1">
+			<h:outputText value="Фамилия:"/>
+			<h:inputText value="#{doctorMB.selectedDoctor.surname}"/>
+			<h:outputText value="Имя:"/>
+			<h:inputText value="#{doctorMB.selectedDoctor.name}"/>
+			<h:outputText value="Отчество:"/>
+			<h:inputText value="#{doctorMB.selectedDoctor.patronymic}"/>
+			<h:outputText value="Категория:"/>
+			<h:selectOneMenu value="#{doctorMB.categoryId}">
+				<f:selectItems value="#{doctorMB.listOfCategories}" var="cat"
+					itemValue="#{cat.id}" itemLabel="#{cat.title}"/>
+			</h:selectOneMenu>
+			<h:outputText value="Специальность:"/>
+			<h:selectOneMenu value="#{doctorMB.specialityId}">
+				<f:selectItems value="#{specialityMB.listOfSpecialities}" var="spec" 
+					itemValue="#{spec.id}"	itemLabel="#{spec.title}"/>
+			</h:selectOneMenu>
+			<h:outputText value="Больница:"/>
+			<h:selectOneMenu value="#{doctorMB.hospitalId}">
+				<f:selectItems value="#{hospitalMB.listOfHospitals}" var="hosp"
+					itemValue="#{hosp.id}" itemLabel="#{hosp.title}"/>
+			</h:selectOneMenu>
+			<h:outputText value="График работы:"/>
+			<h:inputText value="#{doctorMB.selectedDoctor.schedule}"/>
+		</h:panelGrid>
+		<h:commandButton value="Редактировать данные о враче" action="#{doctorMB.editDoctor()}"/>
+	</h:form>
+	<br/>
+	<h:form>
+		<c:if test='#{doctorMB.typeOfPage.equals("Specialities")}'>
+			<h:commandLink value="Вернуться назад" action="#{doctorMB.showDoctorsBySpeciality(doctorMB.selectedSpeciality)}"/>
+		</c:if>
+		<c:if test='#{doctorMB.typeOfPage.equals("Hospitals")}'>
+			<h:commandLink value="Вернуться назад" action="#{doctorMB.showDoctorsOfHospital(doctorMB.selectedHospital)}"/>
+		</c:if>
+	</h:form>
+</h:body>
+</html>

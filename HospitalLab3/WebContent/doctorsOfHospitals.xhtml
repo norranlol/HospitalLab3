@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+	<h:head>
+	    <title>Doctors Of Hospitals</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<h:dataTable var="doctor" value="#{doctorMB.listOfDoctors}" border="1">
+				<h:inputHidden value="#{doctor.id}"/>
+				<h:column>
+	    			<f:facet name="header">Фамилия</f:facet>
+	    			<h:outputText value="#{doctor.surname}"/>
+	    		</h:column>
+	    		<h:column>
+	    			<f:facet name="header">Имя</f:facet>
+	    			<h:outputText value="#{doctor.name}"/>
+	    		</h:column>				
+	    		<h:column>
+	    			<f:facet name="header">Отчество</f:facet>
+	    			<h:outputText value="#{doctor.patronymic}"/>
+	    		</h:column>
+	    		<h:column>
+	    			<f:facet name="header">Дата Рождения</f:facet>
+	    			<h:outputText value="#{doctor.dateOfBirth}"/>
+	    		</h:column>
+	    		<h:column>
+	    			<f:facet name="header">Специальность</f:facet>
+	    			<h:outputText value="#{doctor.speciality.title}"/>
+	    		</h:column>
+	    		<h:column>
+	    			<f:facet name="header">Категория</f:facet>
+	    			<h:outputText value="#{doctor.category.title}"/>
+	    		</h:column>
+	    		<h:column>
+	    			<f:facet name="header">График работы</f:facet>
+	    			<h:outputText value="#{doctor.schedule}"/>
+	    		</h:column>	
+	    		<h:column>
+	    			<f:facet name="header"></f:facet>
+	    			<h:commandLink value="Просмотр информации" action="#{doctorMB.showInfo(doctor)}"/>
+	    		</h:column>
+	    		<h:column>
+	    			<f:facet name="header"></f:facet>
+	    			<h:commandLink value="Редактировать данные" action="#{doctorMB.goToEditDoctor(doctor)}"/>
+	    		</h:column>
+	    		<h:column>
+	    			<f:facet name="header"></f:facet>
+	    			<h:commandLink value="Удалить врача" action="#{doctorMB.deleteDoctor(doctor)}" />
+	    		</h:column>
+			</h:dataTable>
+			<br/>
+			<h:commandLink value="Добавить врача" action="#{doctorMB.goToAddDoctor()}"/>
+			<br/>
+			<h:commandLink value="Вернуться к списку больниц" action="hospitals"/>
+		</h:form>
+	</h:body>
+</html>

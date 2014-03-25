@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <title>Add Doctor Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</h:head>
+<h:body>
+	<h2>Добавить доктора</h2>
+	<h:form>
+		<h:panelGrid columns="2" border="1">
+			<h:outputText value="Фамилия:"/>
+			<h:inputText value="#{doctorMB.surname}"/>
+			<h:outputText value="Имя:"/>
+			<h:inputText value="#{doctorMB.name}"/>
+			<h:outputText value="Отчество:"/>
+			<h:inputText value="#{doctorMB.patronymic}"/>  
+			<h:outputText value="Категория:"/>
+			<h:selectOneMenu value="#{doctorMB.categoryId}">
+				<f:selectItems value="#{doctorMB.listOfCategories}" var="cat"
+					itemValue="#{cat.id}" itemLabel="#{cat.title}"/>
+			</h:selectOneMenu>
+			<h:outputText value="Специальность:"/>
+			<h:selectOneMenu value="#{doctorMB.specialityId}">
+				<f:selectItems value="#{specialityMB.listOfSpecialities}" var="spec" 
+					itemValue="#{spec.id}"	itemLabel="#{spec.title}"/>
+			</h:selectOneMenu>
+			<h:outputText value="Больница:"/>
+			<h:selectOneMenu value="#{doctorMB.hospitalId}">
+				<f:selectItems value="#{hospitalMB.listOfHospitals}" var="hosp"
+					itemValue="#{hosp.id}" itemLabel="#{hosp.title}"/>
+			</h:selectOneMenu>
+			<h:outputText value="Расписание:"/>
+			<h:inputText value="#{doctorMB.schedule}"/>
+			<h:outputText value="Дата рождения:"/>
+			<h:inputText value="#{doctorMB.dateOfBirth}" converterMessage="Дата рождения должна иметь формат dd-MM-yyyy">
+				<f:convertDateTime pattern="dd-MM-yyyy"/>
+			</h:inputText>
+		</h:panelGrid>
+		<h:commandButton value="Добавить доктора" action="#{doctorMB.addDoctor()}"/>
+	</h:form>
+	<h:form>
+		<br/>
+		<h:commandLink value="Вернуться назад" action="#{doctorMB.showDoctorsBySpeciality(doctorMB.selectedSpeciality)}"/>
+	</h:form>
+</h:body>
+</html>

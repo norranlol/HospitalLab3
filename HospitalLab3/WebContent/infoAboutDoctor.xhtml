@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<h:head>
+    <title>Info About Doctor Page</title>
+</h:head>
+<h:body>
+	<h2><h:outputText value="Информация о выбранном враче"/></h2>
+	<h:panelGrid columns="2" border="1">
+		<h:outputText value="Фамилия:"/>
+		<h:outputText value="#{doctorMB.selectedDoctor.surname}"/>
+		<h:outputText value="Имя:"/>
+		<h:outputText value="#{doctorMB.selectedDoctor.name}"/>
+		<h:outputText value="Отчество:"/>
+		<h:outputText value="#{doctorMB.selectedDoctor.patronymic}"/>
+		<h:outputText value="Специальность:"/>
+		<h:outputText value="#{doctorMB.selectedDoctor.speciality.title}"/>
+		<h:outputText value="Категория:"/>
+		<h:outputText value="#{doctorMB.selectedDoctor.category.title}"/>
+		<h:outputText value="График работы:"/>
+		<h:outputText value="#{doctorMB.selectedDoctor.schedule}"/>
+		<h:outputText value="Дата рождения:"/>
+		<h:outputText value="#{doctorMB.selectedDoctor.dateOfBirth}"/>
+	</h:panelGrid>
+	<br/>
+	<h:form>
+		<c:if test='#{doctorMB.typeOfPage.equals("Specialities")}'>
+			<h:commandLink value="Вернуться назад" action="#{doctorMB.showDoctorsBySpeciality(doctorMB.selectedSpeciality)}"/>
+		</c:if>
+		<c:if test='#{doctorMB.typeOfPage.equals("Hospitals")}'>
+			<h:commandLink value="Вернуться назад" action="#{doctorMB.showDoctorsOfHospital(doctorMB.selectedHospital)}"/>
+		</c:if>
+	</h:form>
+</h:body>
+</html>
